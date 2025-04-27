@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# Onboardly - Authentication and Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Onboardly** is a simple full-stack application designed for managing authentication and displaying a dashboard with user-specific content. This project focuses on handling user login and showcasing a dashboard page upon successful authentication.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Login and registration using secure authentication.
+- **Dashboard**: Displays user-specific data after login, including user information and dashboard content.
+- **Responsive Design**: A clean and simple layout, optimized for both desktop and mobile devices.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Frontend**:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript for better maintainability.
+- **TailwindCSS**: Utility-first CSS framework for rapid styling.
+- **Zustand**: State management for React, used to manage user session.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+**Backend**:
+- **Node.js**: JavaScript runtime for building scalable backend services.
+- **Express.js**: Fast web framework for Node.js.
+- **MongoDB**: NoSQL database for storing user data.
+- **JWT (JSON Web Tokens)**: For secure user authentication.
+
+## How to Use
+
+### Prerequisites
+Before running the project, ensure the following are installed on your machine:
+- [Node.js](https://nodejs.org/) (v14+)
+- [MongoDB](https://www.mongodb.com/) (or use MongoDB Atlas for cloud hosting)
+  
+### Clone the Repository
+```bash
+git clone https://github.com/your-username/onboardly.git
+cd onboardly
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+#### Frontend Setup
+```bash
+- cd client
+- npm i
+- npm run dev
 ```
+#### Backend Setup
+```bash
+- cd backend
+- npm i
+- npm run dev
+```
+- Note: Create a .env file in the backend directory and add the necessary configuration like MongoDB URI, NODEMAILER, etc.
+```bash
+EMAIL_USER='your-email-for-nodemailer'
+EMAIL_PASS='your-email-app-pass'
+DB_URI='mongo-uri'
+FRONTEND_URL='front-end-url'
+```
+## Contributing
+This project is a small-scale test project. If you wish to contribute, feel free to fork the repository and submit pull requests. Ensure that any code follows the existing structure and conventions.
+
+## Acknowledgements
+I would like to extend my gratitude to **DevSamurai** for providing me with this test project as part of the application process. This project allowed me to showcase my skills and knowledge, and I truly appreciate the opportunity to demonstrate my abilities.

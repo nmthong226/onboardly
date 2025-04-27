@@ -1,3 +1,10 @@
+//Core
+import { useState } from "react"
+
+//Api/Hooks
+import { loginUser } from "@/lib/api"
+import useStore from "@/stores/userStore"
+
 //Libs
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -20,7 +27,7 @@ import { IoLogoOctocat, IoMailOutline } from "react-icons/io5";
 import { GoLock } from "react-icons/go";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom"
-import { loginUser } from "@/lib/api"
+import { LuInfo } from "react-icons/lu";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -33,6 +40,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,14 +56,14 @@ const Login = () => {
       const res = await loginUser(values);
       console.log("✅ Login successful:", res.user);
 
-      // Handle successful login (e.g., store user data or token)
-      localStorage.setItem("user", JSON.stringify(res.user)); // Save user data in localStorage (optional)
+      // Save the user in Zustand store
+      useStore.getState().setUser(res.user);
 
       // Navigate to the dashboard or home page
       navigate("/dashboard/home"); // Redirect to dashboard or wherever you want
     } catch (error: any) {
       console.error("❌ Login failed:", error?.response?.data?.message || error.message);
-      // alert(error?.response?.data?.message || "Login failed");
+      setError(error?.response?.data?.message || "Login failed");
     }
   };
 
@@ -110,6 +118,14 @@ const Login = () => {
                 </FormItem>
               )}
             />
+            {error &&
+              <>
+                <div className="flex items-center space-x-2 bg-red-100 px-4 rounded-md w-full h-12 text-sm">
+                  <LuInfo className="size-4" />
+                  <p>{error}.</p>
+                </div>
+              </>
+            }
             <Button type="submit" className="flex w-full">Log in</Button>
           </form>
         </Form>

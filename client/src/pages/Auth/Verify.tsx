@@ -12,10 +12,13 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { IoLogoOctocat } from "react-icons/io5"
+import { LuInfo } from "react-icons/lu"
 
 const Verify = () => {
     const [otp, setOtp] = useState("")
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+
     const navigate = useNavigate();
     useEffect(() => {
         const savedEmail = localStorage.getItem("verifyEmail")
@@ -37,7 +40,7 @@ const Verify = () => {
             localStorage.removeItem("verifyEmail");
             navigate("/auth/login");
         } catch (err: any) {
-            alert(err.response?.data?.message || "Verification failed.");
+            setError(err.response?.data?.message || "Verification failed.");
         }
     };
 
@@ -70,6 +73,14 @@ const Verify = () => {
                         <InputOTPSlot index={5} className="w-10 h-10" />
                     </InputOTPGroup>
                 </InputOTP>
+                {error &&
+                    <>
+                        <div className="flex items-center space-x-2 bg-red-100 px-4 rounded-md w-full h-12 text-sm">
+                            <LuInfo className="size-4" />
+                            <p>{error}.</p>
+                        </div>
+                    </>
+                }
                 <p className="flex text-gray-600">Didn't receive an email?
                     <Link to="/auth/register" className="ml-2 font-semibold text-black underline">Resend</Link>
                 </p>

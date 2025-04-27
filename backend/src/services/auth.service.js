@@ -72,3 +72,7 @@ export const loginUser = async ({ email, password }) => {
         email: user.email
     };
 };
+
+export async function findUserByEmail(email) {
+    return await User.findOne({ email });
+}

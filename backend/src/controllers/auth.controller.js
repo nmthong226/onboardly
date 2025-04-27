@@ -1,11 +1,21 @@
-import { loginUser, registerUser, verifyUserOTP } from "../services/auth.service.js";
+import { findUserByEmail, loginUser, registerUser, verifyUserOTP } from "../services/auth.service.js";
 
 export async function register(req, res) {
     try {
-        const user = await registerUser(req.body);
-        res.status(201).json({ message: "User registered", user });
+        const { name, email, password } = req.body;
+
+        // 1. Check if user already exists
+        const existingUser = await findUserByEmail(email);
+        if (existingUser) {
+            return res.status(400).json({ error: "User already exists" });
+        }
+
+        // 2. Create new user
+        const newUser = await registerUser({ name, email, password });
+
+        res.status(201).json({ message: "User registered", user: newUser });
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(500).json({ error: "Something went wrong" });
     }
 }
 

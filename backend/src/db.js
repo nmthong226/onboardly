@@ -1,6 +1,9 @@
 import { mongoose } from 'mongoose';
+import dotenv from 'dotenv';
 
-const uri = "mongodb+srv://onboardly:I8aZ7xVOpBrza3cQ@cluster0.vd8vtog.mongodb.net/onboardly?retryWrites=true&w=majority&appName=Cluster0";
+dotenv.config();
+
+const uri = process.env.DB_URI;
 
 const clientOptions = {
 };

@@ -1,11 +1,13 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
+
+// API/Hooks
+import useStore from "./stores/userStore";
 
 // Layout
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
-
 
 // Pages / Features
 import Login from "@/pages/Auth/Login";
@@ -23,6 +25,8 @@ const inAppRoutes = [
 ]
 
 const App: React.FC = () => {
+  const user = useStore((state) => state.user); // Zustand store to get the user state
+
   return (
     <Router>
       <Routes>
@@ -31,7 +35,13 @@ const App: React.FC = () => {
           <Route
             key={path}
             path={path}
-            element={<AuthLayout>{element}</AuthLayout>}
+            element={
+              user ? (
+                <Navigate to="/dashboard/home" replace />
+              ) : (
+                <AuthLayout>{element}</AuthLayout>
+              )
+            }
           />
         ))}
         {/* In-App Routes */}
@@ -39,7 +49,15 @@ const App: React.FC = () => {
           <Route
             key={path}
             path={path}
-            element={<MainLayout>{element}</MainLayout>}
+            element={
+              user ? (
+                <MainLayout>
+                  {element}
+                </MainLayout>
+              ) : (
+                <Navigate to="/auth/login" replace />
+              )
+            }
           />
         ))}
       </Routes>

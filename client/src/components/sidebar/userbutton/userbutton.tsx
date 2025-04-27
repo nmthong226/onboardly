@@ -1,5 +1,8 @@
 import React from 'react'
 
+//Api/Hooks
+import useStore from "@/stores/userStore";
+
 //Components
 import {
     DropdownMenu,
@@ -25,11 +28,15 @@ interface UserButtonProps {
 }
 
 const UserButton: React.FC<UserButtonProps> = ({ sidebarExpand, }) => {
+    const user = useStore((state) => state.user);
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        useStore.getState().clearUser();
         navigate("/auth/login");
     }
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -39,14 +46,14 @@ const UserButton: React.FC<UserButtonProps> = ({ sidebarExpand, }) => {
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <p className={`transition-all duration-300 origin-left ${sidebarExpand ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'} line-clamp-1 font-semibold text-sm`}>
-                        Thông Nguyễn Minh
+                        {user?.name}
                     </p>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel className="flex flex-col space-y-1">
-                    <p>Thông Nguyễn Minh</p>
-                    <p className="font-normal text-gray-600 text-xs">nmthong226@gmail.com</p>
+                    <p>{user?.name}</p>
+                    <p className="font-normal text-gray-600 text-xs">{user?.email}</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>

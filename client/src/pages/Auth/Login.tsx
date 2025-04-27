@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 
 //Icons
-import { IoMailOutline } from "react-icons/io5";
+import { IoLogoOctocat, IoMailOutline } from "react-icons/io5";
 import { GoLock } from "react-icons/go";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom"
@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,7 +52,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(res.user)); // Save user data in localStorage (optional)
 
       // Navigate to the dashboard or home page
-      navigate("/dashboard"); // Redirect to dashboard or wherever you want
+      navigate("/dashboard/home"); // Redirect to dashboard or wherever you want
     } catch (error: any) {
       console.error("❌ Login failed:", error?.response?.data?.message || error.message);
       // alert(error?.response?.data?.message || "Login failed");
@@ -61,7 +61,10 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center space-y-10 mt-10">
-      <p className="flex font-bold">Onboardly</p>
+      <div className="flex items-center space-x-2">
+        <IoLogoOctocat className="xl:mr-2 size-5 shrink-0" />
+        <p className="flex font-bold">Onboardly</p>
+      </div>
       <div className="flex flex-col justify-center items-center space-y-4 shadow p-4 px-6 border border-gray-300 rounded-xl w-96">
         <div className="flex flex-col space-y-1 w-full">
           <p className="font-medium text-xl">Log in</p>

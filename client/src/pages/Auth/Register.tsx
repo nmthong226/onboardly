@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input"
 //Icons
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom"
+import { IoLogoOctocat } from "react-icons/io5"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -72,7 +73,10 @@ const Register = () => {
 
   return (
     <div className="flex flex-col items-center space-y-10 mt-10">
-      <p className="flex font-bold">Onboardly</p>
+      <div className="flex items-center space-x-2">
+        <IoLogoOctocat className="xl:mr-2 size-5 shrink-0" />
+        <p className="flex font-bold">Onboardly</p>
+      </div>
       <div className="flex flex-col justify-center items-center space-y-4 shadow p-4 px-6 border border-gray-300 rounded-xl w-108">
         <div className="flex flex-col space-y-1 w-full">
           <p className="font-medium text-xl">Sign up</p>

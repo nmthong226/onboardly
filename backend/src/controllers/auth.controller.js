@@ -3,6 +3,8 @@ import { findUserByEmail, loginUser, registerUser, verifyUserOTP } from "../serv
 export async function register(req, res) {
     try {
         const { name, email, password } = req.body;
+        console.log('Register API called');
+        console.log('Request body:', req.body);
 
         // 1. Check if user already exists
         const existingUser = await findUserByEmail(email);

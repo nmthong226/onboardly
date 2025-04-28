@@ -54,7 +54,6 @@ const Login = () => {
     try {
       // Send login request to the backend API
       const res = await loginUser(values);
-      console.log("✅ Login successful:", res.user);
 
       // Save the user in Zustand store
       useStore.getState().setUser(res.user);

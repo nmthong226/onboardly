@@ -60,7 +60,6 @@ const Register = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const response = await registerUser(values);
-      console.log("✅ Registered:", response);
       localStorage.setItem("verifyEmail", response?.user?.email);
       navigate('/auth/verify-email');
     } catch (error: any) {

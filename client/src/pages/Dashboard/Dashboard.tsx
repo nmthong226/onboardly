@@ -130,12 +130,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex flex-col h-[calc(100vh-7rem)] overflow-y-auto">
+      <div className="flex flex-col h-full sm:h-[calc(100vh-7rem)] sm:overflow-y-auto">
         <div className="px-10 xl:px-24 pt-6 w-full h-full md:">
           <ChartAreaInteractive dateRangeProp={dateRange} />
         </div>
-        <div className="flex gap-6 px-10 xl:px-24 py-6 w-full h-full">
-          <div className="flex flex-col shadow p-6 border rounded-xl w-1/2">
+        <div className="flex sm:flex-row flex-col gap-6 px-10 xl:px-24 py-6 w-full h-full">
+          <div className="flex flex-col shadow p-6 border rounded-xl w-full sm:w-1/2">
             <p className="mb-4 font-semibold">Most visited contacts</p>
             {MostContact.map((visit, index) => (
               <div key={index} className="group flex justify-between items-center hover:bg-gray-100 px-2 rounded-lg w-full h-10 font-medium text-sm hover:cursor-pointer">
@@ -150,7 +150,7 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-          <div className="flex flex-col shadow p-6 border rounded-xl w-1/2">
+          <div className="flex flex-col shadow p-6 border rounded-xl w-full sm:w-1/2">
             <p className="mb-4 font-semibold">Least visited contacts</p>
             {LeastContact.map((visit, index) => (
               <div key={index} className="group flex justify-between items-center hover:bg-gray-100 px-2 rounded-lg w-full h-10 font-medium text-sm hover:cursor-pointer">

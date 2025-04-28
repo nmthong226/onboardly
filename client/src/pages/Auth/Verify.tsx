@@ -11,11 +11,22 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+
+//Icons
 import { IoLogoOctocat } from "react-icons/io5"
 import { LuInfo } from "react-icons/lu"
 
 const Verify = () => {
     const [otp, setOtp] = useState("")
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
@@ -36,12 +47,17 @@ const Verify = () => {
                 email,
                 otp: code || otp,
             });
-            alert(res.message);
+            setOpen(true);
+            setMessage(res.message);
             localStorage.removeItem("verifyEmail");
-            navigate("/auth/login");
         } catch (err: any) {
             setError(err.response?.data?.message || "Verification failed.");
         }
+    };
+
+    const handleDialogConfirm = () => {
+        setOpen(false);
+        navigate("/auth/login");
     };
 
     return (
@@ -85,6 +101,26 @@ const Verify = () => {
                     <Link to="/auth/register" className="ml-2 font-semibold text-black underline">Resend</Link>
                 </p>
             </div>
+            {/* Success Dialog */}
+            {/* Success Dialog */}
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className="flex flex-col justify-center items-center w-84">
+                    <DialogHeader>
+                        <DialogTitle>Account Activated!</DialogTitle>
+                        <DialogDescription className="flex justify-center items-center">
+                            {message}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex justify-center w-full">
+                        <button
+                            onClick={handleDialogConfirm}
+                            className="bg-primary hover:bg-primary/90 mt-4 px-4 py-2 rounded-md text-white"
+                        >
+                            OK, I got it
+                        </button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

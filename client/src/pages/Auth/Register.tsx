@@ -70,6 +70,7 @@ const Register = () => {
   };
 
   // Password validation conditions
+  const haslowerCase = /[a-z]/.test(password);
   const hasUpperCase = /[A-Z]/.test(password);
   const hasNumber = /\d/.test(password);
   const isLongEnough = password.length >= 8;
@@ -138,7 +139,7 @@ const Register = () => {
                     </div>
                   </FormControl>
                   <ul className="text-gray-600 text-sm list-disc list-inside">
-                    <li className={hasUpperCase ? "text-green-500" : ""}>
+                    <li className={hasUpperCase && haslowerCase ? "text-green-500" : ""}>
                       Mix of uppercase & lowercase letters
                     </li>
                     <li className={isLongEnough ? "text-green-500" : ""}>

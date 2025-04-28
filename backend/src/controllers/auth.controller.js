@@ -3,15 +3,13 @@ import { findUserByEmail, loginUser, registerUser, verifyUserOTP } from "../serv
 export async function register(req, res) {
     try {
         const { name, email, password } = req.body;
-        console.log('Register API called');
-        console.log('Request body:', req.body);
 
         // 1. Check if user already exists
         const existingUser = await findUserByEmail(email);
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
-
+        
         // 2. Create new user
         const newUser = await registerUser({ name, email, password });
 

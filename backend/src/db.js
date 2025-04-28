@@ -12,6 +12,7 @@ const connectDB = async () => {
     try {
         // Connect to MongoDB
         await mongoose.connect(uri, clientOptions);
+        console.log('✅ MongoDB Connected Successfully');
 
         // Check connection status
         mongoose.connection.once('open', () => {

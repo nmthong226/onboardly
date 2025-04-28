@@ -14,7 +14,10 @@ const transporter = nodemailer.createTransport({
 
 // Send email with OTP + link
 export const sendVerificationEmail = async (to, token, otp) => {
-    const verifyUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
+
+    // const verifyUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
+    // <p>Alternatively, click the link below to verify your email:</p>
+    // <a href="${verifyUrl}">${verifyUrl}</a>
 
     await transporter.sendMail({
         to,
@@ -24,8 +27,6 @@ export const sendVerificationEmail = async (to, token, otp) => {
       <p>Your One-Time Password (OTP) is:</p>
       <h3 style="color:#4CAF50;">${otp}</h3>
       <p>This code will expire in 10 minutes.</p>
-      <p>Alternatively, click the link below to verify your email:</p>
-      <a href="${verifyUrl}">${verifyUrl}</a>
     `,
     });
 };

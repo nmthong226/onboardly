@@ -65,7 +65,7 @@ const Register = () => {
       navigate('/auth/verify-email');
     } catch (error: any) {
       console.error("❌ Registration failed:", error?.response?.data);
-      setError(error?.response?.data?.error);
+      setError(error?.response?.data?.error || "Registration Failed");
     }
   };
 

@@ -60,6 +60,28 @@ const App: React.FC = () => {
             }
           />
         ))}
+        {/* Redirect from "/" to "/auth/login" if not logged in */}
+        <Route
+          path="/"
+          element={
+            user ? (
+              <Navigate to="/dashboard/home" replace />
+            ) : (
+              <Navigate to="/auth/login" replace />
+            )
+          }
+        />
+        {/* Catch-all route: redirect unmatched paths */}
+        <Route
+          path="*"
+          element={
+            user ? (
+              <Navigate to="/dashboard/home" replace />
+            ) : (
+              <Navigate to="/auth/login" replace />
+            )
+          }
+        />
       </Routes>
     </Router>
   );

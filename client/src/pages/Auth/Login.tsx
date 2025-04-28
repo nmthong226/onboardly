@@ -28,6 +28,7 @@ import { GoLock } from "react-icons/go";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom"
 import { LuInfo } from "react-icons/lu";
+import { toast } from "sonner"
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -102,7 +103,19 @@ const Login = () => {
                 <FormItem>
                   <FormLabel className="flex justify-between w-full font-medium text-[15px]">
                     <p>Password</p>
-                    <p className="font-normal underline">Forgot your password?</p>
+                    <Button type="button" variant={"outline"} className="hover:bg-white shadow-none p-0 border-none font-normal underline hover:cursor-pointer" onClick={() =>
+                      toast(
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                          <p className="w-full text-center">Try later</p>
+                        </div>,
+                        {
+                          style: { width: "85px" }
+                        }
+                      )
+                    }>
+                      Forgot your password?
+
+                    </Button>
                   </FormLabel>
                   <FormControl>
                     <div className="relative">
